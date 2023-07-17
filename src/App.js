@@ -1,5 +1,5 @@
-import CircularProgressBar from "./guiComponents/CircularProgressBar";
-import logo from "./logo.svg";
+// import logo from "./logo.svg";
+import SensorPanel from "./sensorPanel/SensorPanel";
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
         </div>
 
         <div>
-          <CircularProgressBar />
+          <SensorPanel />
         </div>
       </section>
     </div>

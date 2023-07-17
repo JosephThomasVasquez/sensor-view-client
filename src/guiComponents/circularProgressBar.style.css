@@ -83,6 +83,15 @@
   font-weight: bold;
 }
 
+.sensor-name-label {
+  font-size: 0.8rem;
+  color: var(--sensor-label-color);
+  font-weight: 500;
+}
+
+.sensor-model-label {
+}
+
 .circular-pb-value-symbol {
   display: inline-block;
   margin-top: -10px;

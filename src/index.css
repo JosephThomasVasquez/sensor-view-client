@@ -1,6 +1,8 @@
 :root {
   --progress-bar-01: #ffae00;
+  --progress-bar-02: #0099ff;
   --progress-bar-hl-01: white;
+  --sensor-label-color: gray;
 }
 
 body {

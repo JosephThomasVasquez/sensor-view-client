@@ -1,23 +1,16 @@
 import React, { useState, useEffect } from "react";
-import "./circularProgressBarStyle.css";
+import "./circularProgressBar.style.css";
 
-const CircularProgressBar = ({ sensor }) => {
-  const initialSensorData = {
-    sensor_name: "Sensor 1",
-    sensor_spec: {
-      model: "DHT11",
-      type: "Temperature & Humidity Sensor",
-      sensors: { temperature: "Temperature", humidity: "Humidity" },
-    },
-    temperature: 69,
-    humidity: 44,
-    _created_at: "2021-10-10T20:00:00.000Z",
-    max_temp: 180,
-    min_temp: -50,
-    connected_to: "Raspberry Pi Pico W 1",
-  };
+const CircularProgressBar = ({ sensor, sensorType }) => {
+  const [colors, setColors] = useState({
+    temp_color: "#ffae00",
+    humid_color: "#0099ff",
+  });
 
-  const [sensorData, setSensorData] = useState({ ...initialSensorData });
+  const [sensorData, setSensorData] = useState({ ...sensor });
+
+  const [temperatureSensor, setTemperatureSensor] = useState({});
+  const [humiditySensor, setHumiditySensor] = useState({});
 
   let tempVal = 0;
 
@@ -38,8 +31,6 @@ const CircularProgressBar = ({ sensor }) => {
             setSensorData({ ...sensorData });
           }
         }, 500);
-
-        // setSensorData({ ...sensorData, temperature: 69 });
       } catch (error) {
         console.log("ERROR:", error);
       }
@@ -52,13 +43,18 @@ const CircularProgressBar = ({ sensor }) => {
 
   return (
     <div className="circular-pb-container">
-      <div>{sensorData?.sensor_name}</div>
+      <div className="sensor-name-label">{sensorData?.sensor_name}</div>
+      <span className="sensor-model-label">
+        {sensorData?.sensor_spec.model}
+      </span>
       <div
         className="circular-pb-progress"
         style={{
-          background: `conic-gradient(#ffae00 ${
-            sensorData?.temperature * 2.25
-          }deg, #efefef 0deg)`,
+          background: `conic-gradient(${
+            sensorType === "Temperature"
+              ? colors.temp_color
+              : colors.humid_color
+          } ${sensorData?.temperature * 2.25}deg, #efefef 0deg)`,
         }}
       >
         <span className="circular-pb-value">
@@ -66,16 +62,11 @@ const CircularProgressBar = ({ sensor }) => {
           <span className="circular-pb-value-symbol">°F</span>
         </span>
       </div>
-      {/* <span
-        className="circular-pb-progress-ol"
-        // style={{
-        //   background: `conic-gradient(#0099ff ${
-        //     sensorData?.temperature * 2.25
-        //   }deg, #efefef 0deg)`,
-        // }}
-      ></span> */}
+
       <span className="circular-pb-text">
-        {sensorData.sensor_spec.sensors.temperature}
+        {sensorType === "Temperature"
+          ? sensorData?.sensor_spec.sensors.temperature
+          : sensorData?.sensor_spec.sensors.humidity}
       </span>
     </div>
   );

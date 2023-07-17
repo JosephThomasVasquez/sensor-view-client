@@ -1,0 +1,15 @@
+:root {
+  --panel-outline-color: rgba(0, 0, 0, 0.15);
+}
+
+.sensor-panel-container {
+  display: flex;
+  padding: 10px;
+  margin: 10px;
+  border: 2px solid var(--panel-outline-color);
+  border-radius: 10px;
+}
+
+.sensor-panel-title {
+  font-weight: bold;
+}
